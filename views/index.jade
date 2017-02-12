@@ -8,7 +8,9 @@ block content
                     img(src='images/background1.jpg' alt="ballroom dance background 1")
                     .caption.center-align
                         h1(style="text-shadow: 0px 0px 10px #bbbbbb") #{title}
-                        a(href="create" class="waves-effect waves-teal btn-flat btn-large white") Create New Routine
+                        a(href="create" class="waves-effect waves-teal btn-large red lighten-2" style="margin: 50px") Create A New Routine
+                        br
+                        a(href="login" id="login-btn" class="waves-effect waves-red btn-large") Load Existing Routine
 
 
 
@@ -16,3 +18,7 @@ block content
             $(document).ready(function () {
                 $('.slider').slider({"indicators": false});
             });
+        style.
+            #login-btn {
+                background-color: #757575;
+            }
