@@ -1,6 +1,18 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
-    a(href="create"): button(type="button") Create New Routine
+    body
+        .slider.fullscreen
+            ul.slides
+                li
+                    img(src='images/background1.jpg' alt="ballroom dance background 1")
+                    .caption.center-align
+                        h1(style="text-shadow: 0px 0px 10px #bbbbbb") #{title}
+                        a(href="create" class="waves-effect waves-teal btn-flat btn-large white") Create New Routine
+
+
+
+        script.
+            $(document).ready(function () {
+                $('.slider').slider({"indicators": false});
+            });

@@ -2,22 +2,28 @@ extends layout
 block content
     .container
         h1= title
-    ul(id="nav-mobile" class="side-nav fixed")
-        li(class="no-padding")
-            ul(class="collapsible collapsible-accordion")
-                li(class="bold")
-                    a(class='collapsible-header waves-effect waves-teal active') Levels
-                        i(class='material-icons') arrow_drop_down
-                    div(class='collapsible-body' style="display: block")
-                        ul(id='level-dropdown')
-                            each level, i in levels
-                                li(value=level)
-                                    a #{level}
-                li(class="bold")
-                    a(class='collapsible-header waves-effect waves-teal') Categories
-                        i(class='material-icons') arrow_drop_down
-                    div(class='collapsible-body' style="display: block")
-                        ul(id='categories-dropdown')
-                            each category, i in categories
-                                li(value=category)
-                                    a #{category}
+    ul(id="slide-out" class="side-nav fixed")
+        ul(class="collapsible collapsible-accordion")
+            li(class="bold")
+                a(class='collapsible-header waves-effect waves-teal active') Select a Level
+                    i(class='material-icons') arrow_drop_down
+                div(class='collapsible-body')
+                    ul(id='level-dropdown')
+                        each level, i in levels
+                            li(value=level)
+                                a #{level}
+            li(class="bold")
+                a(class='collapsible-header waves-effect waves-teal') Select a Style
+                    i(class='material-icons') arrow_drop_down
+                div(class='collapsible-body')
+                    ul(id='categories-dropdown' class='collapsible collapsible-accordion')
+                        each category, i in Object.keys(categories)
+                            li(value=category class="bold")
+                                a(class='collapsible-header waves-effect waves-red') #{category}
+                                    i(class='material-icons') arrow_drop_down
+                                div(class='collapsible-body')
+                                    .row
+                                        ul(id='dances-dropdown')
+                                            each dance, i in (categories[category])
+                                                li(value=dance)
+                                                    a #{dance}
