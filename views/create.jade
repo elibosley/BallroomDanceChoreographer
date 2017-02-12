@@ -1,3 +1,23 @@
-//
-   Created by ekbos on 2/11/2017.
-
+extends layout
+block content
+    .container
+        h1= title
+    ul(id="nav-mobile" class="side-nav fixed")
+        li(class="no-padding")
+            ul(class="collapsible collapsible-accordion")
+                li(class="bold")
+                    a(class='collapsible-header waves-effect waves-teal active') Levels
+                        i(class='material-icons') arrow_drop_down
+                    div(class='collapsible-body' style="display: block")
+                        ul(id='level-dropdown')
+                            each level, i in levels
+                                li(value=level)
+                                    a #{level}
+                li(class="bold")
+                    a(class='collapsible-header waves-effect waves-teal') Categories
+                        i(class='material-icons') arrow_drop_down
+                    div(class='collapsible-body' style="display: block")
+                        ul(id='categories-dropdown')
+                            each category, i in categories
+                                li(value=category)
+                                    a #{category}
