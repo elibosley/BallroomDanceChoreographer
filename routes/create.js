@@ -7,7 +7,7 @@ var categories = [];
 var dances = [];
 jf.readFile(path.join('public', 'data', 'dances.json'), function (err, obj) {
     if (obj) {
-        categories = obj
+        categories = obj;
         console.log(categories)
 
     }
