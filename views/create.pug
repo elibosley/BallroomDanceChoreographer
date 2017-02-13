@@ -27,7 +27,8 @@ block content
                                             ul(id='dances-dropdown')
                                                 each dance, i in (categories[category])
                                                     li(value=dance)
-                                                        a #{dance}
+                                                        a(href="?dance="+ dance) #{dance}
+
     script.
         // Initialize collapse button
         $(".button-collapse").sideNav();
