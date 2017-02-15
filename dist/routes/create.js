@@ -1,35 +1,33 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
-const path = require('path');
-const jf = require('jsonfile');
-const async = require('async');
+var path = require('path');
+var jf = require('jsonfile');
+var async = require('async');
 var categories = [];
 var dances = [];
-const filenameLookup = {
+var filenameLookup = {
     "Cha-Cha": "cha_cha.json"
 };
 
 jf.readFile(path.join('public', 'data', 'dances.json'), function (err, obj) {
     if (obj) {
         categories = obj;
-        console.log(categories)
-
-    }
-    else {
-        console.log(err)
+        console.log(categories);
+    } else {
+        console.log(err);
     }
 });
 
-
 router.get('/:categoryId/:danceId', function (req, res) {
-    const dance = req.params['danceId'];
+    var dance = req.params['danceId'];
     if (filenameLookup[dance]) {
         console.log('here!');
         jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {
             if (error) {
                 console.log(error);
-            }
-            else {
+            } else {
                 res.render('create', {
                     title: 'Create Routine',
                     levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],
@@ -38,23 +36,20 @@ router.get('/:categoryId/:danceId', function (req, res) {
                 });
             }
         });
-    }
-    else {
-        res.send('no dance by name ' + dance)
+    } else {
+        res.send('no dance by name ' + dance);
     }
 });
-
 
 /* GET create page */
 router.get('/', function (req, res, next) {
     console.log(req.query['dance']);
-    const dance = req.query['dance'];
+    var dance = req.query['dance'];
     if (dance && filenameLookup[dance]) {
         jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {
             if (error) {
                 getStepsCallback(error);
-            }
-            else {
+            } else {
                 res.render('create', {
                     title: 'Create Routine',
                     levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],
@@ -63,9 +58,7 @@ router.get('/', function (req, res, next) {
                 });
             }
         });
-
-    }
-    else {
+    } else {
         res.render('create', {
             title: 'Create Routine',
             levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],
@@ -73,12 +66,12 @@ router.get('/', function (req, res, next) {
             steps: []
         });
     }
-
 });
 
 router.get(':danceId', function (req, res, next) {
     console.log(req.params.danceId);
-    res.send("set dance to " + req.params.danceId)
+    res.send("set dance to " + req.params.danceId);
 });
 
 module.exports = router;
+//# sourceMappingURL=create.js.map

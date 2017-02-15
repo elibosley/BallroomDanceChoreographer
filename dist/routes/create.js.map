@@ -1,0 +1,47 @@
+{
+  "version": 3,
+  "sources": [
+    "../../routes/create.js"
+  ],
+  "names": [
+    "express",
+    "require",
+    "router",
+    "Router",
+    "path",
+    "jf",
+    "async",
+    "categories",
+    "dances",
+    "filenameLookup",
+    "readFile",
+    "join",
+    "err",
+    "obj",
+    "console",
+    "log",
+    "get",
+    "req",
+    "res",
+    "dance",
+    "params",
+    "error",
+    "stepData",
+    "render",
+    "title",
+    "levels",
+    "steps",
+    "send",
+    "next",
+    "query",
+    "getStepsCallback",
+    "danceId",
+    "module",
+    "exports"
+  ],
+  "mappings": "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",
+  "file": "create.js",
+  "sourcesContent": [
+    "var express = require('express');\r\nvar router = express.Router();\r\nconst path = require('path');\r\nconst jf = require('jsonfile');\r\nconst async = require('async');\r\nvar categories = [];\r\nvar dances = [];\r\nconst filenameLookup = {\r\n    \"Cha-Cha\": \"cha_cha.json\"\r\n};\r\n\r\njf.readFile(path.join('public', 'data', 'dances.json'), function (err, obj) {\r\n    if (obj) {\r\n        categories = obj;\r\n        console.log(categories)\r\n\r\n    }\r\n    else {\r\n        console.log(err)\r\n    }\r\n});\r\n\r\n\r\nrouter.get('/:categoryId/:danceId', function (req, res) {\r\n    const dance = req.params['danceId'];\r\n    if (filenameLookup[dance]) {\r\n        console.log('here!');\r\n        jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {\r\n            if (error) {\r\n                console.log(error);\r\n            }\r\n            else {\r\n                res.render('create', {\r\n                    title: 'Create Routine',\r\n                    levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],\r\n                    categories: categories,\r\n                    steps: stepData\r\n                });\r\n            }\r\n        });\r\n    }\r\n    else {\r\n        res.send('no dance by name ' + dance)\r\n    }\r\n});\r\n\r\n\r\n/* GET create page */\r\nrouter.get('/', function (req, res, next) {\r\n    console.log(req.query['dance']);\r\n    const dance = req.query['dance'];\r\n    if (dance && filenameLookup[dance]) {\r\n        jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {\r\n            if (error) {\r\n                getStepsCallback(error);\r\n            }\r\n            else {\r\n                res.render('create', {\r\n                    title: 'Create Routine',\r\n                    levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],\r\n                    categories: categories,\r\n                    steps: stepData\r\n                });\r\n            }\r\n        });\r\n\r\n    }\r\n    else {\r\n        res.render('create', {\r\n            title: 'Create Routine',\r\n            levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],\r\n            categories: categories,\r\n            steps: []\r\n        });\r\n    }\r\n\r\n});\r\n\r\nrouter.get(':danceId', function (req, res, next) {\r\n    console.log(req.params.danceId);\r\n    res.send(\"set dance to \" + req.params.danceId)\r\n});\r\n\r\nmodule.exports = router;"
+  ]
+}

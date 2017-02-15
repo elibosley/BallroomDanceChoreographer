@@ -27,7 +27,7 @@ block content
                                             ul(id='dances-dropdown')
                                                 each dance, i in (categories[category])
                                                     li(value=dance)
-                                                        a(href="?dance="+ dance) #{dance}
+                                                        a(href="/create/" + category + "/" + dance) #{dance}
 
     script.
         // Initialize collapse button
