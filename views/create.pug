@@ -12,7 +12,7 @@ block content
                         ul(id='level-dropdown')
                             each level, i in levels
                                 li(value=level)
-                                    a #{level}
+                                    a(base href="/create?level=" + level) #{level}
                 li(class="bold")
                     a(class='collapsible-header waves-effect waves-teal') Select a Style
                         i(class='material-icons') arrow_drop_down
@@ -27,7 +27,7 @@ block content
                                             ul(id='dances-dropdown')
                                                 each dance, i in (categories[category])
                                                     li(value=dance)
-                                                        a(href="/create/" + category + "/" + dance) #{dance}
+                                                        a(href= "?category=" + category + "&dance=" + dance) #{dance}
 
     script.
         // Initialize collapse button

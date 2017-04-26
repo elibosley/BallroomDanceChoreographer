@@ -20,30 +20,14 @@ jf.readFile(path.join('public', 'data', 'dances.json'), function (err, obj) {
     }
 });
 
-router.get('/:categoryId/:danceId', function (req, res) {
-    var dance = req.params['danceId'];
-    if (filenameLookup[dance]) {
-        console.log('here!');
-        jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {
-            if (error) {
-                console.log(error);
-            } else {
-                res.render('create', {
-                    title: 'Create Routine',
-                    levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],
-                    categories: categories,
-                    steps: stepData
-                });
-            }
-        });
-    } else {
-        res.send('no dance by name ' + dance);
-    }
-});
-
 /* GET create page */
-router.get('/', function (req, res, next) {
-    console.log(req.query['dance']);
+router.get('/:level?:category?:dance?', function (req, res, next) {
+    /* res.json({
+        level: req.query.level,
+        category: req.query.category,
+        dance: req.query.dance
+    }); */
+    console.log("level: " + req.query['level'] + " dance: " + req.query['dance'] + " category: " + req.query['category']);
     var dance = req.query['dance'];
     if (dance && filenameLookup[dance]) {
         jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {
