@@ -14,11 +14,21 @@ var create = require('./routes/create');
 
 var app = express();
 
+// Database Setup
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/ballroom-data');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
+// Make our db accessible to our router
+app.use(function (req, res, next) {
+    req.db = db;
+    next();
+});
+
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());

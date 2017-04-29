@@ -2,7 +2,7 @@ extends layout
 block content
     main
         .container
-            h1= title
+            h2= title
         ul(id="slide-out" class="side-nav fixed")
             ul(class="collapsible collapsible-accordion")
                 li(class="bold")
@@ -11,27 +11,49 @@ block content
                     div(class='collapsible-body')
                         ul(id='level-dropdown')
                             each level, i in levels
-                                li(value=level)
-                                    a(base href="/create?level=" + level) #{level}
+                                li(value=level class="level-button" id=level)
+                                    a() #{level}
+                                    //a(base href="/create?level=" + level) #{level}
                 li(class="bold")
                     a(class='collapsible-header waves-effect waves-teal') Select a Style
                         i(class='material-icons') arrow_drop_down
                     div(class='collapsible-body')
                         ul(id='categories-dropdown' class='collapsible collapsible-accordion')
                             each category, i in Object.keys(categories)
-                                li(value=category class="bold")
+                                li(value=category class="bold category-dropdown" id=category)
                                     a(class='collapsible-header waves-effect waves-red') #{category}
                                         i(class='material-icons') arrow_drop_down
                                     div(class='collapsible-body')
                                         .row
                                             ul(id='dances-dropdown')
                                                 each dance, i in (categories[category])
-                                                    li(value=dance)
-                                                        a(href= "?category=" + category + "&dance=" + dance) #{dance}
+                                                    li(value=dance class="dance-button" id=dance)
+                                                        a() #{dance}
+                                                        //a(href= "?category=" + category + "&dance=" + dance) #{dance}
 
     script.
         // Initialize collapse button
         $(".button-collapse").sideNav();
+        var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
+
+        $(".level-button").click(function () {
+            //alert("level button pushed");
+            $(".level-button").removeClass("active")
+            $(this).toggleClass("active");
+            selectedDance.level = this.id;
+            console.log(selectedDance)
+        });
+
+        $(".dance-button").click(function () {
+            //alert("level button pushed");
+            $(".dance-button").removeClass("active")
+            $(this).toggleClass("active");
+            selectedDance.category = $(this).closest(".category-dropdown").id
+            console.log(selectedDance)
+        });
+
+
+
     style.
         header, main, footer {
             padding-left: 300px;

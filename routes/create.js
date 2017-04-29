@@ -30,13 +30,13 @@ router.get('/:level?:category?:dance?', function (req, res, next) {
     console.log("level: " + req.query['level'] + " dance: " + req.query['dance'] + " category: " + req.query['category']);
     const dance = req.query['dance'];
     if (dance && filenameLookup[dance]) {
-        jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) {
+        jf.readFile(path.join('public', 'data', filenameLookup[dance]), function (error, stepData) { //TODO Replace this with a DB read
             if (error) {
                 getStepsCallback(error);
             }
             else {
                 res.render('create', {
-                    title: 'Create Routine',
+                    title: 'Create ' + dance + ' Routine',
                     levels: ['Newcomer', 'Bronze', 'Silver', 'Gold', 'Open'],
                     categories: categories,
                     steps: stepData

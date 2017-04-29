@@ -18,10 +18,13 @@
     "morgan": "~1.7.0",
     "node-sass-middleware": "0.8.0",
     "pug": "latest",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "monk": "^4.0.0",
+    "mongodb": "^2.2.26"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.4.0"
+    "babel-preset-env": "^1.4.0",
+    "pug-cli": "^1.0.0-alpha6"
   }
 }
