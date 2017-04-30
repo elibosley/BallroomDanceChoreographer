@@ -3,6 +3,7 @@ block content
     main
         .container
             h2= title
+            p(class="result") No result yet
         ul(id="slide-out" class="side-nav fixed")
             ul(class="collapsible collapsible-accordion")
                 li(class="bold")
@@ -30,7 +31,8 @@ block content
                                                     li(value=dance class="dance-button" id=dance)
                                                         a() #{dance}
                                                         //a(href= "?category=" + category + "&dance=" + dance) #{dance}
-
+        a(href='#', data-activates="slide-out", class='button-collapse top-nav full hide-on-large-only')
+            i.material-icons menu
     script.
         // Initialize collapse button
         $(".button-collapse").sideNav();
@@ -41,17 +43,25 @@ block content
             $(".level-button").removeClass("active")
             $(this).toggleClass("active");
             selectedDance.level = this.id;
-            console.log(selectedDance)
+            console.log(selectedDance);
+            fetchDanceData(selectedDance);
         });
 
         $(".dance-button").click(function () {
             //alert("level button pushed");
             $(".dance-button").removeClass("active")
             $(this).toggleClass("active");
-            selectedDance.category = $(this).closest(".category-dropdown").id
-            console.log(selectedDance)
+            selectedDance.category = $(this).closest("li.category-dropdown").attr('id');
+            selectedDance.dance = this.id;
+            console.log(selectedDance);
+            fetchDanceData(selectedDance);
         });
 
+        function fetchDanceData(selectedDance) {
+            $.get("/api/dances", function (data) {
+                $(".result").html(JSON.stringify(data));
+            });
+        }
 
 
     style.

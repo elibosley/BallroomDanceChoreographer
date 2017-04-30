@@ -23,10 +23,10 @@ jf.readFile(path.join('public', 'data', 'dances.json'), function (err, obj) {
 /* GET create page */
 router.get('/:level?:category?:dance?', function (req, res, next) {
     /* res.json({
-        level: req.query.level,
-        category: req.query.category,
-        dance: req.query.dance
-    }); */
+     level: req.query.level,
+     category: req.query.category,
+     dance: req.query.dance
+     }); */
     console.log("level: " + req.query['level'] + " dance: " + req.query['dance'] + " category: " + req.query['category']);
     const dance = req.query['dance'];
     if (dance && filenameLookup[dance]) {

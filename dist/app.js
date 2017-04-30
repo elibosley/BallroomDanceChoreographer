@@ -11,6 +11,7 @@ var fs = require("fs");
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var create = require('./routes/create');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -46,9 +47,12 @@ app.use('/js', express.static(__dirname + '/node_modules/materialize-css/dist/js
 app.use('/css', express.static(__dirname + '/node_modules/materialize-css/dist/css')); // redirect materialize CSS
 app.use('/fonts', express.static(__dirname + '/node_modules/materialize-css/dist/fonts/')); // redirect fonts
 //TODO add font usage for materialize here
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/create', create);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -9,6 +9,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:level/:category/:dance', function (req, res, next) {
+    var db = req.db;
+
     res.json({
         level: req.query.level,
         category: req.query.category,
