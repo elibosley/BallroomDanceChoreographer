@@ -20,7 +20,9 @@
     "pug": "latest",
     "serve-favicon": "~2.3.0",
     "monk": "^4.0.0",
-    "mongodb": "^2.2.26"
+    "mongodb": "^2.2.26",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

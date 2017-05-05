@@ -1,0 +1,44 @@
+[
+  {
+    "levels" : [
+      "Bronze",
+      "Silver",
+      "Gold"
+    ],
+    "categories": [
+      "Latin",
+      "Standard",
+      "Rhythm",
+      "Smooth"
+    ],
+    "subcategories": {
+      "Latin": [
+        "Samba",
+        "Cha-Cha",
+        "Rumba",
+        "Paso Doble",
+        "Jive"
+      ],
+      "Standard": [
+        "Waltz",
+        "Tango",
+        "Viennese Waltz",
+        "Foxtrot",
+        "Quickstep"
+      ],
+      "Rhythm": [
+        "Cha-Cha",
+        "Rumba",
+        "East Coast Swing",
+        "Bolero",
+        "Mambo"
+      ],
+      "Smooth": [
+        "Waltz",
+        "Tango",
+        "Foxtrot",
+        "Viennese Waltz"
+      ]
+    }
+  }
+]
