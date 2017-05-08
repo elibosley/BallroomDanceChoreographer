@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="stylesheet" href="/css/materialize.css"><!-- TODO Remove this stylesheet and replace with local from Materialize--><link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons"></head><body><header><nav class="top-nav"><div class="nav-wrapper"><a class="brand-logo center">Ballroom Dance Choreographer</a></div></nav></header><script src="/js/jquery.min.js"></script><script src="/js/materialize.min.js"></script><main><div class="container"><h2></h2><p class="result">No result yet</p></div><ul class="side-nav fixed" id="slide-out"><ul class="collapsible collapsible-accordion"><li class="bold"><a class="collapsible-header waves-effect waves-teal active">Select a Level<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul id="level-dropdown"><!--a(base href="/create?level=" + level) #{level}--></ul></div></li><li class="bold"><a class="collapsible-header waves-effect waves-teal">Select a Style<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul class="collapsible collapsible-accordion" id="categories-dropdown"><!--each category, i in Object.keys(categories)li(value=category class="bold category-dropdown" id=category)
+    //a(class='collapsible-header waves-effect waves-red') 
+        i(class='material-icons') arrow_drop_down
+    //div(class='collapsible-body')
+        .row
+            ul(id='dances-dropdown')
+                each dance, i in (categories[category])
+                    li(value=dance class="dance-button" id=dance)
+                        a() 
+                        //a(href= "?category=" + category + "&dance=" + dance) --></ul></div></li></ul></ul><a class="button-collapse top-nav full hide-on-large-only" href="#" data-activates="slide-out"><i class="material-icons">menu</i></a></main><script>loadDanceCategories();
+// Initialize collapse button
+$(".button-collapse").sideNav();
+var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
+
+
+var result;
+
+
+
+
+
+function loadDanceCategories() {
+    $.getJSON("/api/dances", function (data) {
+        /* Load Level Buttons First */
+        levels = data.levels; //
+        $.each(data.levels, function (key, val) {
+            $("#level-dropdown").append("<li id=" + val + " class='level-button'> <a>" + val + "</a></li>");
+        });
+
+        /* Load Categories with nested Sub-Categories */
+            let htmlString = null;
+        $.each(data.subcategories, function (category, dances) {
+            htmlString = "<li id=" + category + " class='bold category-dropdown'> " +
+                "<a class='collapsible-header waves-effect waves-red'> " +
+                category + "<i class='material-icons'>arrow_drop_down</i></a>" +
+                "<div class='collapsible-body'><row><ul id='dances-dropdown'> ";
+
+            $.each(dances, function (idx, dance) {
+                htmlString += "<li id=" + dance + " class='dance-button'> <a>" + dance + "</a></li>"
+            });
+            htmlString += ("</li></ul> </row> </div>");
+            $("#categories-dropdown").append(htmlString);
+        });
+
+        loadSidebarClickListeners();
+    });
+}
+
+function loadSidebarClickListeners() {
+
+    /* Add click listener for the level button */
+    $(".level-button").on('click', function () {
+        //alert("level button pushed");
+        $(".level-button").removeClass("active")
+        $(this).toggleClass("active");
+        selectedDance.level = this.id;
+        console.log(selectedDance);
+        fetchDanceData(selectedDance);
+    });
+
+    /* Add click listener for dance categories */
+    $(".dance-button").on('click', function () {
+        //alert("level button pushed");
+        $(".dance-button").removeClass("active")
+        $(this).toggleClass("active");
+        selectedDance.category = $(this).closest("li.category-dropdown").attr('id');
+        selectedDance.dance = this.id;
+        console.log(selectedDance);
+        fetchDanceData(selectedDance);
+    });
+}
+
+function fetchDanceData(selectedDance) {
+    $.get("/api/dances", function (data) {
+        $(".result").html(JSON.stringify(data));
+    });
+}
+
+</script><style>header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}</style></body></html>

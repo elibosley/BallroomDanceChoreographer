@@ -40,6 +40,7 @@ app.use(require('node-sass-middleware')({
     sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/app/js')));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.use('/js', express.static(__dirname + '/node_modules/materialize-css/dist/js')); // redirect materialize JS
 app.use('/css', express.static(__dirname + '/node_modules/materialize-css/dist/css')); // redirect materialize CSS

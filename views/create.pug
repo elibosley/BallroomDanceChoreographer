@@ -20,11 +20,11 @@ block content
                         i(class='material-icons') arrow_drop_down
                     div(class='collapsible-body')
                         ul(id='categories-dropdown' class='collapsible collapsible-accordion')
-                            each category, i in Object.keys(categories)
+                            //each category, i in Object.keys(categories)
                                 li(value=category class="bold category-dropdown" id=category)
-                                    a(class='collapsible-header waves-effect waves-red') #{category}
+                                    //a(class='collapsible-header waves-effect waves-red') #{category}
                                         i(class='material-icons') arrow_drop_down
-                                    div(class='collapsible-body')
+                                    //div(class='collapsible-body')
                                         .row
                                             ul(id='dances-dropdown')
                                                 each dance, i in (categories[category])
@@ -34,22 +34,18 @@ block content
         a(href='#', data-activates="slide-out", class='button-collapse top-nav full hide-on-large-only')
             i.material-icons menu
     script.
-        loadDanceCategories()
+
+        loadDanceCategories();
         // Initialize collapse button
         $(".button-collapse").sideNav();
         var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
 
 
         var result;
-        $(".dance-button").on('click', '#level-button', function () {
-            //alert("level button pushed");
-            $(".dance-button").removeClass("active")
-            $(this).toggleClass("active");
-            selectedDance.category = $(this).closest("li.category-dropdown").attr('id');
-            selectedDance.dance = this.id;
-            console.log(selectedDance);
-            fetchDanceData(selectedDance);
-        });
+
+
+
+
 
         function loadDanceCategories() {
             $.getJSON("/api/dances", function (data) {
@@ -58,41 +54,50 @@ block content
                 $.each(data.levels, function (key, val) {
                     $("#level-dropdown").append("<li id=" + val + " class='level-button'> <a>" + val + "</a></li>");
                 });
-                /* Add click listener for the level button */
-                $(".level-button").on('click', function () {
-                    //alert("level button pushed");
-                    $(".level-button").removeClass("active")
-                    $(this).toggleClass("active");
-                    selectedDance.level = this.id;
-                    console.log(selectedDance);
-                    fetchDanceData(selectedDance);
-                });
-                let items;
-                $.each(data.subcategories, function (key, val) {
-                    items = [];
-                    items.push("<li id='" + key + "'>" + val + "</li>");
+
+                /* Load Categories with nested Sub-Categories */
+                    let htmlString = null;
+                $.each(data.subcategories, function (category, dances) {
+                    htmlString = "<li id=" + category + " class='bold category-dropdown'> " +
+                        "<a class='collapsible-header waves-effect waves-red'> " +
+                        category + "<i class='material-icons'>arrow_drop_down</i></a>" +
+                        "<div class='collapsible-body'><row><ul id='dances-dropdown'> ";
+
+                    $.each(dances, function (idx, dance) {
+                        htmlString += "<li id=" + dance + " class='dance-button'> <a>" + dance + "</a></li>"
+                    });
+                    htmlString += ("</li></ul> </row> </div>");
+                    $("#categories-dropdown").append(htmlString);
                 });
 
-                /** Convert for dynamic load with jQuery
-                                            each category, i in Object.keys(categories)
-                                                 li(value=category class="bold category-dropdown" id=category)
-                                                 a(class='collapsible-header waves-effect waves-red') #{category}
-                                                         i(class='material-icons') arrow_drop_down
-                                                     div(class='collapsible-body')
-                                                         .row
-                                                             ul(id='dances-dropdown')
-                                                                 each dance, i in (categories[category])
-                                                                     li(value=dance class="dance-button" id=dance)
-                                                                         a() #{dance}
-                                                                         //a(href= "?category=" + category + "&dance=" + dance) #{dance}
-                 *
-                 * */
-                $("<ul/>", {
-                    "class": "my-new-list",
-                    html: items.join("")
-                }).appendTo(".result");
+                loadSidebarClickListeners();
             });
         }
+
+        function loadSidebarClickListeners() {
+
+            /* Add click listener for the level button */
+            $(".level-button").on('click', function () {
+                //alert("level button pushed");
+                $(".level-button").removeClass("active")
+                $(this).toggleClass("active");
+                selectedDance.level = this.id;
+                console.log(selectedDance);
+                fetchDanceData(selectedDance);
+            });
+
+            /* Add click listener for dance categories */
+            $(".dance-button").on('click', function () {
+                //alert("level button pushed");
+                $(".dance-button").removeClass("active")
+                $(this).toggleClass("active");
+                selectedDance.category = $(this).closest("li.category-dropdown").attr('id');
+                selectedDance.dance = this.id;
+                console.log(selectedDance);
+                fetchDanceData(selectedDance);
+            });
+        }
+
         function fetchDanceData(selectedDance) {
             $.get("/api/dances", function (data) {
                 $(".result").html(JSON.stringify(data));
