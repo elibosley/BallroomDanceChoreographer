@@ -14,11 +14,11 @@ router.get('/dances', function (req, res, next) {
     });
 });
 
-router.get('/:category/:dance', function (req, res, next) {
+
+router.get('/dance/:level/:category/:dance', function (req, res, next) {
     var db = req.db;
-    console.log(req.params.level);
     var collection = db.get(req.params.category);
-    collection.findOne({dance: req.params.dance}, {steps: 1}, function (e, stepList) {
+    collection.findOne({dance: req.params.dance}, function (e, stepList) {
         res.json(
             stepList
         )
