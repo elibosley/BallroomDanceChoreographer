@@ -60,7 +60,7 @@ function loadSidebarClickListeners() {
 
 
 /**
- * Function used to fetch a
+ * Function used to fetch a set of dance steps and other data from the database
  * @param selectedDance
  */
 function fetchDanceData(selectedDance) {

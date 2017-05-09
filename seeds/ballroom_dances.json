@@ -14,7 +14,7 @@
     "subcategories": {
       "Latin": [
         "Samba",
-        "Cha-Cha",
+        "Cha_Cha",
         "Rumba",
         "Paso Doble",
         "Jive"
@@ -27,7 +27,7 @@
         "Quickstep"
       ],
       "Rhythm": [
-        "Cha-Cha",
+        "Cha_Cha",
         "Rumba",
         "East Coast Swing",
         "Bolero",

@@ -1,6 +1,7 @@
 [
   {
-    "dance": "Cha-Cha",
+    "dance": "Cha_Cha",
+    "display_name": "Cha Cha",
     "steps": [
       {
         "basic_in_place": {
@@ -14,7 +15,8 @@
     ]
   },
   {
-    "dance": "Rumba",
+    "dance": "rumba",
+    "name": "Rumba",
     "steps": [
       {
 

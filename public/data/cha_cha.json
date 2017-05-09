@@ -1,9 +1,0 @@
-{
-  "basic_in_place": {
-    "name": "Basic in Place",
-    "start_alignment": "LOD",
-    "end_alignment": "LOD",
-    "count": "4",
-    "animation": "#"
-  }
-}

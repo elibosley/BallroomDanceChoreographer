@@ -16,6 +16,7 @@ router.get('/dances', function (req, res, next) {
 
 
 router.get('/dance/:level/:category/:dance', function (req, res, next) {
+    //TODO Add level filtering to this query
     var db = req.db;
     var collection = db.get(req.params.category);
     collection.findOne({dance: req.params.dance}, function (e, stepList) {

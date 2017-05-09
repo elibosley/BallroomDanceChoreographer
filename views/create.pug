@@ -6,6 +6,11 @@ block content
         .container
             h2= title
             p(class="result") No result yet
+
+            ul(id="my-ui-list")
+                li() Hi
+                li() Test
+                li() What's Up
         ul(id="slide-out" class="side-nav fixed")
             ul(class="collapsible collapsible-accordion")
                 li(class="bold")
@@ -38,14 +43,13 @@ block content
         loadDanceCategories();
         // Initialize collapse button
         $(".button-collapse").sideNav();
+
+
         var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
+        loadDanceCategories();
 
-
-        var result;
-
-
-
-
+        var list = document.getElementById("my-ui-list");
+        Sortable.create(list); // That's all.
 
     style.
         ul li.active.dance-button { /* Style for the pink button on sidebar */
