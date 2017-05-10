@@ -7,7 +7,8 @@
                 each dance, i in (categories[category])
                     li(value=dance class="dance-button" id=dance)
                         a() 
-                        //a(href= "?category=" + category + "&dance=" + dance) --></ul></div></li></ul></ul><a class="button-collapse top-nav full hide-on-large-only" href="#" data-activates="slide-out"><i class="material-icons">menu</i></a></main><script>// Initialize collapse button
+                        //a(href= "?category=" + category + "&dance=" + dance) --></ul></div></li></ul></ul><a class="button-collapse top-nav full hide-on-large-only" href="#" data-activates="slide-out"><i class="material-icons">menu</i></a></main><script>loadDanceCategories();
+// Initialize collapse button
 $(".button-collapse").sideNav();
 
 
@@ -16,9 +17,7 @@ loadDanceCategories();
 
 var list = document.getElementById("my-ui-list");
 Sortable.create(list); // That's all.
-</script><style>
-
-ul li.active.dance-button { /* Style for the pink button on sidebar */
+</script><style>ul li.active.dance-button { /* Style for the pink button on sidebar */
     background-color: #ee6e73 !important;
 }
 
