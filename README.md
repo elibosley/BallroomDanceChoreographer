@@ -11,6 +11,7 @@
 ---
 1. Install MongoDB and Node.js
 2. Run `npm install` in BallroomDanceChoreographer folder
+3. Run `npm install -g --only=dev` to install `mongo-seed-db` globally
 3. Run MongoDB with `mongod`, enter `--dbpath` parameter if desired
 4. Run `seed` in console to seed the MongoDB instance with the dances
 and step information
