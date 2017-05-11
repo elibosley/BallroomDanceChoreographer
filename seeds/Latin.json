@@ -4,14 +4,65 @@
     "display_name": "Cha Cha",
     "steps": [
       {
-        "basic_in_place": {
-          "name": "Basic in Place",
-          "level": "Bronze",
-          "start_alignment": "LOD",
-          "end_alignment": "LOD",
-          "count": "4"
-        }
+        "name": "Basic (in Place)",
+        "level": "Bronze",
+        "start_alignment": "LOD",
+        "end_alignment": "LOD",
+        "count": "4"
+      },
+      {
+        "name": "Basic (Closed)",
+        "level": "Bronze",
+        "start_alignment": "Wall",
+        "end_alignment": "LOD",
+        "count": "4"
+      },
+      {
+        "name": "Basic (Open)",
+        "level": "Bronze",
+        "start_alignment": "",
+        "end_alignment": "",
+        "count": "4"
+      },
+      {
+        "name": "New York to Left",
+        "level": "Bronze",
+        "start_alignment": "DW",
+        "end_alignment": "DW",
+        "count": "4"
+      },
+      {
+        "name": "New York to Right",
+        "level": "Bronze",
+        "start_alignment": "DW",
+        "end_alignment": "DW",
+        "count": "4"
+      },
+      {
+        "name": "Spot Turn to Left"
+      },
+      {
+        "name": "Spot Turn to Right"
+      },
+      {
+        "name": "Switch Turn to Left"
+      },
+      {
+        "name": "Switch Turn to Right"
+      },
+      {
+        "name": "Underarm Turn to Left"
+      },
+      {
+        "name": "Underarm Turn to Right"
+      },
+      {
+        "name": "Left Side Shoulder to Shoulder"
+      },
+      {
+        "name": "Right Side Shoulder to Shoulder"
       }
+
     ]
   },
   {
@@ -19,7 +70,6 @@
     "name": "Rumba",
     "steps": [
       {
-
       }
     ]
   }

@@ -6,11 +6,11 @@ block content
         .container
             h2= title
             p(class="result") No result yet
-
-            ul(id="my-ui-list")
-                li() Hi
-                li() Test
-                li() What's Up
+            .row
+                input(type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps..." class="col s6")
+            .row
+                ul(id="step-list" class="collection col s6 m6 l6")
+                ul(id="selected-step-list" class="collection col s6 m6 l6")
         ul(id="slide-out" class="side-nav fixed")
             ul(class="collapsible collapsible-accordion")
                 li(class="bold")
@@ -40,7 +40,6 @@ block content
             i.material-icons menu
     script.
 
-        loadDanceCategories();
         // Initialize collapse button
         $(".button-collapse").sideNav();
 
@@ -48,10 +47,50 @@ block content
         var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
         loadDanceCategories();
 
-        var list = document.getElementById("my-ui-list");
-        Sortable.create(list); // That's all.
+        var list1 = document.getElementById("step-list");
+        var list2 = document.getElementById("selected-step-list")
+        var sortablePull = new Sortable(list1, {
+            group: {name: "drag-list", pull: 'clone', put: false}
+        })
+        var sortablePut = new Sortable(list2, {
+            group: {name: "drag-list", pull: false, put: true},
+            filter: ".js-remove, .js-edit",
+            onFilter: function (evt) {
+                var item = evt.item,
+                    ctrl = evt.target;
+
+                if (Sortable.utils.is(ctrl, ".js-remove")) {  // Click on remove button
+                    item.parentNode.removeChild(item); // remove sortable item
+                }
+                else if (Sortable.utils.is(ctrl, ".js-edit")) {  // Click on edit link
+                    // ...
+                }
+            },
+            onMove: function (evt) {
+
+            }
+        });
+
+        function searchSteps() {
+            // Declare variables
+            var input, filter, ul, li, a, i;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("step-list");
+            li = ul.getElementsByTagName('li');
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
 
     style.
+
         ul li.active.dance-button { /* Style for the pink button on sidebar */
             background-color: #ee6e73 !important;
         }

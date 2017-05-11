@@ -39,22 +39,22 @@ function loadSidebarClickListeners() {
     /* Add click listener for the level button */
     $(".level-button").on('click', function () {
         //alert("level button pushed");
-        $(".level-button").removeClass("active")
+        $(".level-button").removeClass("active");
         $(this).toggleClass("active");
         selectedDance.level = this.id;
         console.log(selectedDance);
-        fetchDanceData(selectedDance);
+        loadDanceData(selectedDance);
     });
 
     /* Add click listener for dance categories */
     $(".dance-button").on('click', function () {
         //alert("level button pushed");
-        $(".dance-button").removeClass("active")
+        $(".dance-button").removeClass("active");
         $(this).toggleClass("active");
         selectedDance.category = $(this).closest("li.category-dropdown").attr('id');
         selectedDance.dance = this.id;
         console.log(selectedDance);
-        fetchDanceData(selectedDance);
+        loadDanceData(selectedDance);
     });
 }
 
@@ -63,9 +63,15 @@ function loadSidebarClickListeners() {
  * Function used to fetch a set of dance steps and other data from the database
  * @param selectedDance
  */
-function fetchDanceData(selectedDance) {
+function loadDanceData(selectedDance) {
     let url = "/api/dance/" + selectedDance.level + "/" + selectedDance.category + "/" + selectedDance.dance;
     $.get(url, function (data) {
-        $(".result").html(JSON.stringify(data));
+        if (data) {
+            $.each(data.steps, function (idx, step) {
+                console.log(step.name);
+                $("#step-list").append('<li class="collection-item">' + step.name +
+                    '<a class="secondary-content" href="javascript:;"><i class="js-remove material-icons">remove</i></a></li>');
+            });
+        }
     });
 }

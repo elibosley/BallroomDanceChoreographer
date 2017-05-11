@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="stylesheet" href="/css/materialize.css"><!-- TODO Remove this stylesheet and replace with local from Materialize--><link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons"></head><body><header><nav class="top-nav"><div class="nav-wrapper"><a class="brand-logo center">Ballroom Dance Choreographer</a></div></nav></header><script src="/js/jquery.min.js"></script><script src="/js/materialize.min.js"></script><script src="/js/Sortable.min.js"></script><script src="create.js"></script><main><div class="container"><h2></h2><p class="result">No result yet</p><ul id="my-ui-list"><li>Hi</li><li>Test</li><li>What's Up</li></ul></div><ul class="side-nav fixed" id="slide-out"><ul class="collapsible collapsible-accordion"><li class="bold"><a class="collapsible-header waves-effect waves-teal active">Select a Level<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul id="level-dropdown"><!--a(base href="/create?level=" + level) #{level}--></ul></div></li><li class="bold"><a class="collapsible-header waves-effect waves-teal">Select a Style<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul class="collapsible collapsible-accordion" id="categories-dropdown"><!--each category, i in Object.keys(categories)li(value=category class="bold category-dropdown" id=category)
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="stylesheet" href="/css/materialize.css"><!-- TODO Remove this stylesheet and replace with local from Materialize--><link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons"></head><body><header><nav class="top-nav"><div class="nav-wrapper"><a class="brand-logo center">Ballroom Dance Choreographer</a></div></nav></header><script src="/js/jquery.min.js"></script><script src="/js/materialize.min.js"></script><script src="/js/Sortable.min.js"></script><script src="create.js"></script><main><div class="container"><h2></h2><p class="result">No result yet</p><div class="row"><input class="col s6" type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps..."></div><div class="row"><ul class="collection col s6 m6 l6" id="step-list"></ul><ul class="collection col s6 m6 l6" id="selected-step-list"></ul></div></div><ul class="side-nav fixed" id="slide-out"><ul class="collapsible collapsible-accordion"><li class="bold"><a class="collapsible-header waves-effect waves-teal active">Select a Level<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul id="level-dropdown"><!--a(base href="/create?level=" + level) #{level}--></ul></div></li><li class="bold"><a class="collapsible-header waves-effect waves-teal">Select a Style<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul class="collapsible collapsible-accordion" id="categories-dropdown"><!--each category, i in Object.keys(categories)li(value=category class="bold category-dropdown" id=category)
     //a(class='collapsible-header waves-effect waves-red') 
         i(class='material-icons') arrow_drop_down
     //div(class='collapsible-body')
@@ -7,16 +7,54 @@
                 each dance, i in (categories[category])
                     li(value=dance class="dance-button" id=dance)
                         a() 
-                        //a(href= "?category=" + category + "&dance=" + dance) --></ul></div></li></ul></ul><a class="button-collapse top-nav full hide-on-large-only" href="#" data-activates="slide-out"><i class="material-icons">menu</i></a></main><script>loadDanceCategories();
-// Initialize collapse button
+                        //a(href= "?category=" + category + "&dance=" + dance) --></ul></div></li></ul></ul><a class="button-collapse top-nav full hide-on-large-only" href="#" data-activates="slide-out"><i class="material-icons">menu</i></a></main><script>// Initialize collapse button
 $(".button-collapse").sideNav();
 
 
 var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
 loadDanceCategories();
 
-var list = document.getElementById("my-ui-list");
-Sortable.create(list); // That's all.
+var list1 = document.getElementById("step-list");
+var list2 = document.getElementById("selected-step-list")
+var sortablePull = new Sortable(list1, {
+    group: {name: "drag-list", pull: 'clone', put: false}
+})
+var sortablePut = new Sortable(list2, {
+    group: {name: "drag-list", pull: false, put: true},
+    filter: ".js-remove, .js-edit",
+    onFilter: function (evt) {
+        var item = evt.item,
+            ctrl = evt.target;
+
+        if (Sortable.utils.is(ctrl, ".js-remove")) {  // Click on remove button
+            item.parentNode.removeChild(item); // remove sortable item
+        }
+        else if (Sortable.utils.is(ctrl, ".js-edit")) {  // Click on edit link
+            // ...
+        }
+    },
+    onMove: function (evt) {
+
+    }
+});
+
+function searchSteps() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("step-list");
+    li = ul.getElementsByTagName('li');
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
 </script><style>ul li.active.dance-button { /* Style for the pink button on sidebar */
     background-color: #ee6e73 !important;
 }
