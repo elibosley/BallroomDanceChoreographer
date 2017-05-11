@@ -1,7 +1,3 @@
-/**
- * Created by ekbos on 5/7/2017.
- */
-
 
 /**
  * Function used to load dance categories from the backend. This populates the sidebar with both the levels and the
@@ -10,7 +6,6 @@
 function loadDanceCategories() {
     $.getJSON("/api/dances", function (data) {
         /* Load Level Buttons First */
-        levels = data.levels; //
         $.each(data.levels, function (key, val) {
             $("#level-dropdown").append("<li id=" + val + " class='level-button'> <a>" + val + "</a></li>");
         });

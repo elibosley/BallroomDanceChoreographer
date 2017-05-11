@@ -5,12 +5,15 @@ block content
     main
         .container
             h2= title
-            p(class="result") No result yet
+            .divider
             .row
-                input(type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps..." class="col s6")
+                .col.s6
+                    input(type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps...")
             .row
-                ul(id="step-list" class="collection col s6 m6 l6")
-                ul(id="selected-step-list" class="collection col s6 m6 l6" style="touch-action:none")
+                .col.s6
+                    ul(id="step-list" class="collection")
+                .col.s6
+                    ul(id="selected-step-list" class="collection" style="touch-action:none")
         .nav
             ul(id="slide-out" class="side-nav fixed")
                 ul(class="collapsible collapsible-accordion")
@@ -53,15 +56,17 @@ block content
 
         var list1 = document.getElementById("step-list");
         var list2 = document.getElementById("selected-step-list")
-        var sortablePull = new Sortable(list1, {
+        var loadedStepsSortable = new Sortable(list1, {
             group: {name: "drag-list", pull: 'clone', put: true},
+            animation: 75,
             onAdd: function (evt) {
                 this.el.removeChild(evt.item);
             },
             sort: false
         })
-        var sortablePut = new Sortable(list2, {
+        var routineSortable = new Sortable(list2, {
             group: {name: "drag-list", pull: true, put: true},
+            animation: 75,
             filter: ".js-remove, .js-edit",
             onFilter: function (evt) {
                 var item = evt.item,
@@ -74,8 +79,25 @@ block content
                     // ...
                 }
             },
-            onMove: function (evt) {
+            store: {
+                /**
+                 * Get the order of elements. Called once during initialization.
+                 * @param   {Sortable}  sortable
+                 * @returns {Array}
+                 */
+                get: function (sortable) {
+                    var order = localStorage.getItem(sortable.options.group.name);
+                    return order ? order.split('|') : [];
+                },
 
+                /**
+                 * Save the order of elements. Called onEnd (when the item is dropped).
+                 * @param {Sortable}  sortable
+                 */
+                set: function (sortable) {
+                    var order = sortable.toArray();
+                    localStorage.setItem(sortable.options.group.name, order.join('|'));
+                }
             }
         });
 
@@ -101,6 +123,13 @@ block content
 
         ul li.active.dance-button { /* Style for the pink button on sidebar */
             background-color: #ee6e73 !important;
+        }
+
+        ul#selected-step-list {
+            min-height: 50vh;
+        }
+        ul#step-list {
+            min-height: 50vh;
         }
 
         header, main, footer {
