@@ -67,8 +67,8 @@ function loadDanceData(selectedDance) {
     let url = "/api/dance/" + selectedDance.level + "/" + selectedDance.category + "/" + selectedDance.dance;
     $.get(url, function (data) {
         if (data) {
+            $(".collection-item").remove();
             $.each(data.steps, function (idx, step) {
-                console.log(step.name);
                 $("#step-list").append('<li class="collection-item">' + step.name +
                     '<a class="secondary-content" href="javascript:;"><i class="js-remove material-icons">remove</i></a></li>');
             });

@@ -10,38 +10,42 @@ block content
                 input(type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps..." class="col s6")
             .row
                 ul(id="step-list" class="collection col s6 m6 l6")
-                ul(id="selected-step-list" class="collection col s6 m6 l6")
-        ul(id="slide-out" class="side-nav fixed")
-            ul(class="collapsible collapsible-accordion")
-                li(class="bold")
-                    a(class='collapsible-header waves-effect waves-teal active') Select a Level
-                        i(class='material-icons') arrow_drop_down
-                    div(class='collapsible-body')
-                        ul(id='level-dropdown')
+                ul(id="selected-step-list" class="collection col s6 m6 l6" style="touch-action:none")
+        .nav
+            ul(id="slide-out" class="side-nav fixed")
+                ul(class="collapsible collapsible-accordion")
+                    li(class="bold")
+                        a(class='collapsible-header waves-effect waves-teal active') Select a Level
+                            i(class='material-icons') arrow_drop_down
+                        div(class='collapsible-body')
+                            ul(id='level-dropdown')
 
-                            //a(base href="/create?level=" + level) #{level}
-                li(class="bold")
-                    a(class='collapsible-header waves-effect waves-teal') Select a Style
-                        i(class='material-icons') arrow_drop_down
-                    div(class='collapsible-body')
-                        ul(id='categories-dropdown' class='collapsible collapsible-accordion')
-                            //each category, i in Object.keys(categories)
-                                li(value=category class="bold category-dropdown" id=category)
-                                    //a(class='collapsible-header waves-effect waves-red') #{category}
-                                        i(class='material-icons') arrow_drop_down
-                                    //div(class='collapsible-body')
-                                        .row
-                                            ul(id='dances-dropdown')
-                                                each dance, i in (categories[category])
-                                                    li(value=dance class="dance-button" id=dance)
-                                                        a() #{dance}
-                                                        //a(href= "?category=" + category + "&dance=" + dance) #{dance}
-        a(href='#', data-activates="slide-out", class='button-collapse top-nav full hide-on-large-only')
-            i.material-icons menu
+                                //a(base href="/create?level=" + level) #{level}
+                    li(class="bold")
+                        a(class='collapsible-header waves-effect waves-teal') Select a Style
+                            i(class='material-icons') arrow_drop_down
+                        div(class='collapsible-body')
+                            ul(id='categories-dropdown' class='collapsible collapsible-accordion')
+                                //each category, i in Object.keys(categories)
+                                    li(value=category class="bold category-dropdown" id=category)
+                                        //a(class='collapsible-header waves-effect waves-red') #{category}
+                                            i(class='material-icons') arrow_drop_down
+                                        //div(class='collapsible-body')
+                                            .row
+                                                ul(id='dances-dropdown')
+                                                    each dance, i in (categories[category])
+                                                        li(value=dance class="dance-button" id=dance)
+                                                            a() #{dance}
+                                                            //a(href= "?category=" + category + "&dance=" + dance) #{dance}
     script.
 
         // Initialize collapse button
-        $(".button-collapse").sideNav();
+        $('.button-collapse').sideNav({
+                menuWidth: 300, // Default is 240
+                closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            }
+        );
+        $('.collapsible').collapsible();
 
 
         var selectedDance = {level: "Bronze", category: "Latin", dance: "Cha-Cha"}
@@ -50,10 +54,14 @@ block content
         var list1 = document.getElementById("step-list");
         var list2 = document.getElementById("selected-step-list")
         var sortablePull = new Sortable(list1, {
-            group: {name: "drag-list", pull: 'clone', put: false}
+            group: {name: "drag-list", pull: 'clone', put: true},
+            onAdd: function (evt) {
+                this.el.removeChild(evt.item);
+            },
+            sort: false
         })
         var sortablePut = new Sortable(list2, {
-            group: {name: "drag-list", pull: false, put: true},
+            group: {name: "drag-list", pull: true, put: true},
             filter: ".js-remove, .js-edit",
             onFilter: function (evt) {
                 var item = evt.item,
