@@ -1,4 +1,3 @@
-
 /**
  * Function used to load dance categories from the backend. This populates the sidebar with both the levels and the
  * different categories available.
@@ -65,7 +64,7 @@ function loadDanceData(selectedDance) {
             $(".collection-item").remove();
             $.each(data.steps, function (idx, step) {
                 $("#step-list").append('<li class="collection-item">' + step.name +
-                    '<a class="secondary-content" href="javascript:;"><i class="js-remove material-icons">remove</i></a></li>');
+                    '</li>');
             });
         }
     });

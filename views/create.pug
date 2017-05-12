@@ -56,6 +56,8 @@ block content
 
         var list1 = document.getElementById("step-list");
         var list2 = document.getElementById("selected-step-list")
+
+        // Sortable for steps loaded from the database
         var loadedStepsSortable = new Sortable(list1, {
             group: {name: "drag-list", pull: 'clone', put: true},
             animation: 75,
@@ -63,7 +65,9 @@ block content
                 this.el.removeChild(evt.item);
             },
             sort: false
-        })
+        });
+
+        // Sortable for steps selected by user for routine
         var routineSortable = new Sortable(list2, {
             group: {name: "drag-list", pull: true, put: true},
             animation: 75,
@@ -79,6 +83,21 @@ block content
                     // ...
                 }
             },
+
+            onSort: function (/**Event*/evt) {
+                console.log(evt)
+                var result = [];
+
+                if (evt.to.children.length === 1) {
+
+                } else {
+
+                    for (var i = 0; i < evt.to.children.length; i++) {
+                        result.push(evt.to.children[i].outerText)
+                    }
+                }
+                console.log(result);
+            },
             store: {
                 /**
                  * Get the order of elements. Called once during initialization.
@@ -86,6 +105,7 @@ block content
                  * @returns {Array}
                  */
                 get: function (sortable) {
+                    console.log("called GET")
                     var order = localStorage.getItem(sortable.options.group.name);
                     return order ? order.split('|') : [];
                 },
@@ -96,6 +116,7 @@ block content
                  */
                 set: function (sortable) {
                     var order = sortable.toArray();
+                    console.log(order);
                     localStorage.setItem(sortable.options.group.name, order.join('|'));
                 }
             }
