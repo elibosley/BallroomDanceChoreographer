@@ -17,9 +17,9 @@
 and step information
 5. Run `bin\www.js` in Node
 6. Navigate your web browser to localhost:3000
-7. Enjoy
+7. Enjoy!
 
 ### About
 ---
-A node app to create dance routines for ballroom, I'm planning on having
+A Node app to create dance routines for ballroom, I'm planning on having
 user profiles and the ability to create new steps!

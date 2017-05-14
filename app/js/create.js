@@ -47,6 +47,7 @@ function loadSidebarClickListeners() {
         $(this).toggleClass("active");
         selectedDance.category = $(this).closest("li.category-dropdown").attr('id');
         selectedDance.dance = this.id;
+        $("#main-title").text("Create a " + selectedDance.dance + " Routine");
         console.log(selectedDance);
         loadDanceData(selectedDance);
     });

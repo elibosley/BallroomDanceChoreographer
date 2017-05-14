@@ -4,15 +4,17 @@ block content
     script(src="create.js")
     main
         .container
-            h2= title
+            h3(id="main-title")= title
             .divider
             .row
-                .col.s6
+                .col.s12
                     input(type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps...")
             .row
                 .col.s6
+                    h4 Available Steps
                     ul(id="step-list" class="collection")
                 .col.s6
+                    h4 Your Routine
                     ul(id="selected-step-list" class="collection" style="touch-action:none")
         .nav
             ul(id="slide-out" class="side-nav fixed")
@@ -29,17 +31,7 @@ block content
                             i(class='material-icons') arrow_drop_down
                         div(class='collapsible-body')
                             ul(id='categories-dropdown' class='collapsible collapsible-accordion')
-                                //each category, i in Object.keys(categories)
-                                    li(value=category class="bold category-dropdown" id=category)
-                                        //a(class='collapsible-header waves-effect waves-red') #{category}
-                                            i(class='material-icons') arrow_drop_down
-                                        //div(class='collapsible-body')
-                                            .row
-                                                ul(id='dances-dropdown')
-                                                    each dance, i in (categories[category])
-                                                        li(value=dance class="dance-button" id=dance)
-                                                            a() #{dance}
-                                                            //a(href= "?category=" + category + "&dance=" + dance) #{dance}
+
     script.
 
         // Initialize collapse button

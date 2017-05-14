@@ -1,13 +1,60 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="stylesheet" href="/css/materialize.css"><!-- TODO Remove this stylesheet and replace with local from Materialize--><link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons"></head><body><header><nav class="top-nav"><div class="nav-wrapper"><a class="button-collapse top-nav full hide-on-large-only" href="#" data-activates="slide-out"><i class="material-icons">menu</i></a><a class="brand-logo center">Ballroom Dance Choreographer</a></div></nav></header><script src="/js/jquery.min.js"></script><script src="/js/materialize.min.js"></script><script src="/js/Sortable.min.js"></script><script src="create.js"></script><main><div class="container"><h2></h2><div class="divider"></div><div class="row"><div class="col s6"><input type="text" id="myInput" onkeyup="searchSteps()" placeholder="Search for steps..."></div></div><div class="row"><div class="col s6"><ul class="collection" id="step-list"></ul></div><div class="col s6"><ul class="collection" id="selected-step-list" style="touch-action:none;"></ul></div></div></div><div class="nav"><ul class="side-nav fixed" id="slide-out"><ul class="collapsible collapsible-accordion"><li class="bold"><a class="collapsible-header waves-effect waves-teal active">Select a Level<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul id="level-dropdown"><!--a(base href="/create?level=" + level) #{level}--></ul></div></li><li class="bold"><a class="collapsible-header waves-effect waves-teal">Select a Style<i class="material-icons">arrow_drop_down</i></a><div class="collapsible-body"><ul class="collapsible collapsible-accordion" id="categories-dropdown"><!--each category, i in Object.keys(categories)li(value=category class="bold category-dropdown" id=category)
-    //a(class='collapsible-header waves-effect waves-red') 
-        i(class='material-icons') arrow_drop_down
-    //div(class='collapsible-body')
-        .row
-            ul(id='dances-dropdown')
-                each dance, i in (categories[category])
-                    li(value=dance class="dance-button" id=dance)
-                        a() 
-                        //a(href= "?category=" + category + "&dance=" + dance) --></ul></div></li></ul></ul></div></main><script>// Initialize collapse button
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/css/materialize.css">
+    <!-- TODO Remove this stylesheet and replace with local from Materialize-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+<header>
+    <nav class="top-nav">
+        <div class="nav-wrapper"><a class="button-collapse top-nav full hide-on-large-only" href="#"
+                                    data-activates="slide-out"><i class="material-icons">menu</i></a><a
+                class="brand-logo center">Ballroom Dance Choreographer</a></div>
+    </nav>
+</header>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/Sortable.min.js"></script>
+<script src="create.js"></script>
+<main>
+    <div class="container"><h3 id="main-title"></h3>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s12"><input type="text" id="myInput" onkeyup="searchSteps()"
+                                        placeholder="Search for steps..."></div>
+        </div>
+        <div class="row">
+            <div class="col s6"><h4>Available Steps</h4>
+                <ul class="collection" id="step-list"></ul>
+            </div>
+            <div class="col s6"><h4>Your Routine</h4>
+                <ul class="collection" id="selected-step-list" style="touch-action:none;"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <ul class="side-nav fixed" id="slide-out">
+            <ul class="collapsible collapsible-accordion">
+                <li class="bold"><a class="collapsible-header waves-effect waves-teal active">Select a Level<i
+                        class="material-icons">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                        <ul id="level-dropdown"><!--a(base href="/create?level=" + level) #{level}--></ul>
+                    </div>
+                </li>
+                <li class="bold"><a class="collapsible-header waves-effect waves-teal">Select a Style<i
+                        class="material-icons">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-accordion" id="categories-dropdown"></ul>
+                    </div>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</main>
+<script>// Initialize collapse button
 $('.button-collapse').sideNav({
         menuWidth: 300, // Default is 240
     closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
