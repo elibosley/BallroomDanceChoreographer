@@ -39,28 +39,36 @@
         "count": "4"
       },
       {
-        "name": "Spot Turn to Left"
+        "name": "Spot Turn to Left",
+        "level": "Bronze"
       },
       {
-        "name": "Spot Turn to Right"
+        "name": "Spot Turn to Right",
+        "level": "Bronze"
       },
       {
-        "name": "Switch Turn to Left"
+        "name": "Switch Turn to Left",
+        "level": "Bronze"
       },
       {
-        "name": "Switch Turn to Right"
+        "name": "Switch Turn to Right",
+        "level": "Bronze"
       },
       {
-        "name": "Underarm Turn to Left"
+        "name": "Underarm Turn to Left",
+        "level": "Bronze"
       },
       {
-        "name": "Underarm Turn to Right"
+        "name": "Underarm Turn to Right",
+        "level": "Bronze"
       },
       {
-        "name": "Left Side Shoulder to Shoulder"
+        "name": "Left Side Shoulder to Shoulder",
+        "level": "Bronze"
       },
       {
-        "name": "Right Side Shoulder to Shoulder"
+        "name": "Right Side Shoulder to Shoulder",
+        "level": "Bronze"
       }
 
     ]

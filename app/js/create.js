@@ -63,9 +63,12 @@ function loadDanceData(selectedDance) {
         if (data) {
             $(".collection-item").remove();
             $.each(data.steps, function (idx, step) {
-                $("#step-list").append('<li class="collection-item">' + step.name +
+                $("#step-list").append('<li class="collection-item ' + step.level + '">' + step.name +
                     '</li>');
             });
+        }
+        else {
+            $(".collection-item").remove();
         }
     });
 }
