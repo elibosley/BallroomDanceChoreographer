@@ -24,12 +24,7 @@ router.get('/dance/:level/:category/:dance', function (req, res, next) {
             stepList
         )
     });
-    /*
-    res.json({
-        level: req.query.level,
-        category: req.query.category,
-        dance: req.query.dance
-    }); */
 });
+
 
 module.exports = router;

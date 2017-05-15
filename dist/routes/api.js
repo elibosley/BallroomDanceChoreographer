@@ -21,12 +21,6 @@ router.get('/dance/:level/:category/:dance', function (req, res, next) {
     collection.findOne({ dance: req.params.dance }, function (e, stepList) {
         res.json(stepList);
     });
-    /*
-    res.json({
-        level: req.query.level,
-        category: req.query.category,
-        dance: req.query.dance
-    }); */
 });
 
 module.exports = router;
